@@ -46,6 +46,7 @@ jobs:
       - name: build-apk
         working-directory: ./buildscripts
         run:  |
+          ./buildall.sh --clean
           ./buildall.sh -n
       - name: relocate apks
         run: |
