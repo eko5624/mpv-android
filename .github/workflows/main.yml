@@ -19,12 +19,13 @@ jobs:
       #     python3-setuptools unzip openssl ca-certificates nasm
       #     sudo pip3 install meson ninja mako  
       
-      - name: set up JDK 11
+      - name: set up JDK 
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
-          cache: gradle          
+          cache: 'gradle'
+          
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       
