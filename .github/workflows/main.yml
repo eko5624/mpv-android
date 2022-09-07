@@ -49,7 +49,7 @@ jobs:
         working-directory: ./buildscripts
         run:  |
           ./buildall.sh --clean
-          ./buildall.sh -n
+          ./buildall.sh --arch arm64 mpv
       - name: relocate apks
         run: |
           mkdir -p app/build/outputs/apk/release
