@@ -9,8 +9,8 @@ jobs:
       steps:
       - uses: actions/checkout@v3
         with:
-          repository: "mpv-android/mpv-android"
-          ref: "sfan5/vk"
+          repository: "eko5624/mpv-android"
+          ref: "master"
           fetch-depth: 0
           
       #- name: Install dependencies
