@@ -72,4 +72,4 @@ jobs:
         with:
           name: Arm-Build
           path: |
-                app/build/outputs/apk/release/mpv-default-signed.apk
+            app/build/outputs/apk/release/mpv-default-signed.apk
