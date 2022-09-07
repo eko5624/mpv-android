@@ -73,6 +73,3 @@ jobs:
           name: Arm-Build
           path: |
                 app/build/outputs/apk/release/mpv-default-signed.apk
-                app/build/outputs/apk/release/mpv-api29-signed.apk
-                app/build/outputs/apk/release/mpv-default-debug-signed.apk
-                app/build/outputs/apk/release/mpv-api29-debug-signed.apk
