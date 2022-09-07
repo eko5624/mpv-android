@@ -7,7 +7,7 @@ cleanbuild=0
 nodeps=0
 clang=1
 target=mpv-android
-arch=armv8a
+arch=armv7l
 
 getdeps () {
 	varname="dep_${1//-/_}[*]"
@@ -121,7 +121,7 @@ usage () {
 		"-n             Do not build dependencies" \
 		"--clean        Clean build dirs before compiling" \
 		"--gcc          Use gcc compiler (unsupported!)" \
-		"--arch <arch>  Build for specified architecture (default: $arch; supported: armv8a, arm64, x86, x86_64)"
+		"--arch <arch>  Build for specified architecture (default: $arch; supported: armv7l, arm64, x86, x86_64)"
 	exit 0
 }
 
