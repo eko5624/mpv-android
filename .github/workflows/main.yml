@@ -9,37 +9,16 @@ jobs:
       steps:
       - uses: actions/checkout@v3
         with:
-          repository: "eko5624/mpv-android"
+          repository: "mpv-android/mpv-android"
           ref: "master"
           fetch-depth: 0
-          
-      #- name: Install dependencies
-      #  run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y autoconf pkg-config libtool ninja-build python3-pip \
-      #     python3-setuptools unzip openssl ca-certificates nasm
-      #     sudo pip3 install meson ninja mako  
       
       - name: set up JDK 
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '11'
           distribution: 'temurin'
-          cache: 'gradle'
-          
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
       
-      #- name: Setup Android SDK
-      #  uses: android-actions/setup-android@v2
-        
-      #- name: remove old ndk  
-      #  run: sdkmanager --uninstall "ndk;23.2.8568313"
-      #       rm -rf sdkmanager /usr/local/lib/android/sdk/ndk-bundle
-             
-      #- name: Install NDK
-      #  run: sdkmanager "ndk;24.0.8215888"
-        
       - name: download-deps
         working-directory: ./buildscripts
         run: |
@@ -50,7 +29,8 @@ jobs:
         run:  |
           ./buildall.sh --clean
           ./buildall.sh --arch arm64 mpv
-      - name: relocate apks
+      
+     - name: relocate apks
         run: |
           mkdir -p app/build/outputs/apk/release
           cp "./app/build/outputs/apk/default/release/app-default-universal-release-unsigned.apk"  app/build/outputs/apk/release/mpv-default.apk
@@ -67,9 +47,16 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
           buildToolsVersion: 33.0.0
-      - name : upload APKs
-        uses: actions/upload-artifact@v2
+
+      - name: Get current time
+        run: |
+          echo "short_time=$(date "+%Y-%m-%d")" >> $GITHUB_ENV
+    
+      - name: Release      
+        uses: softprops/action-gh-release@v1
         with:
-          name: Arm-Build
-          path: |
-            app/build/outputs/apk/release/mpv-default-signed.apk
+          tag_name: latest
+          name: mpv-${{ env.short_time }}
+          files: app/build/outputs/apk/release/mpv-default-signed.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
