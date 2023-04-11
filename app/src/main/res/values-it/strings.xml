@@ -15,6 +15,8 @@
     <string name="track_audio">Audio</string>
     <string name="track_subs">Sottotitoli</string>
     <string name="track_off">Off</string>
+    <string name="btn_play">Riproduci</string>
+    <string name="btn_pause">Pausa</string>
     <string name="ui_volume">Volume: %d%%</string>
     <string name="ui_brightness">Luminosità: %d%%</string>
     <string name="ui_seek_distance">%1$s\n[%2$s]</string>
@@ -41,6 +43,7 @@
     <string name="sub_delay">Ritardo sottotitoli</string>
     <string name="notice_show_all_files">Visualizzazione di tutti i file</string>
     <string name="notice_show_media_files">Visualizzazione solo dei file multimediali</string>
+    <string name="option_remember_choice">Ricorda scelta al prossimo avvio</string>
 
     <!-- Action buttons -->
     <string name="switch_orientation">Cambia orientamento</string>
@@ -51,10 +54,13 @@
     <string name="toggle_stats">Statistiche on/off</string>
     <string name="chapter_button">Capitolo</string>
     <string name="sub_seek_button">Cerca per sottotitolo</string>
+    <string name="file_picker_old">Selettore file\n(obsoleto)</string>
     <string name="action_settings">Impostazioni</string>
     <string name="action_playlist">Scaletta</string>
     <string name="action_open_url">Apri URL</string>
+    <string name="action_open_doc_tree">Apri albero documenti</string>
     <string name="action_pick_file">Scegli file</string>
+    <string name="action_pick_file_old">Scegli file (obsoleto)</string>
     <string name="action_external_storage">Archiviazione esterna</string>
     <string name="action_toggle_filter">Filtro on/off</string>
 
@@ -91,8 +97,6 @@
     <string name="pref_display_media_title_summary">Mostra il titolo multimediale o il nome del file video sopra i controlli. I file audio mostreranno sempre i loro metadati.</string>
 
     <string name="pref_bottom_controls_title">Mostra controlli in fondo allo schermo</string>
-
-    <string name="pref_display_in_cutout_title">Estendi video nell\'area notch/tagliata</string>
 
     <string name="pref_no_ui_pause_title">Continua riproduzione durante popup UI</string>
     <string name="pref_no_ui_pause_summary">Seleziona se la riproduzione deve continuare mentre vengono aperti i popup (es. finestra della scaletta)</string>

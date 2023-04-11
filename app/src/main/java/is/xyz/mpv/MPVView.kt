@@ -32,7 +32,7 @@ internal class MPVView(context: Context, attrs: AttributeSet) : SurfaceView(cont
 
         // hwdec
         val hwdec = if (sharedPreferences.getBoolean("hardware_decoding", true))
-            "mediacodec-copy"
+            "auto"
         else
             "no"
 
@@ -102,6 +102,7 @@ internal class MPVView(context: Context, attrs: AttributeSet) : SurfaceView(cont
 
         MPVLib.setOptionString("vo", "gpu")
         MPVLib.setOptionString("gpu-context", "android")
+        MPVLib.setOptionString("opengl-es", "yes")
         MPVLib.setOptionString("hwdec", hwdec)
         MPVLib.setOptionString("hwdec-codecs", "h264,hevc,mpeg4,mpeg2video,vp8,vp9")
         MPVLib.setOptionString("ao", "audiotrack,opensles")
@@ -116,8 +117,6 @@ internal class MPVView(context: Context, attrs: AttributeSet) : SurfaceView(cont
         val screenshotDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         screenshotDir.mkdirs()
         MPVLib.setOptionString("screenshot-directory", screenshotDir.path)
-        // DR is known to ruin performance at least on Exynos devices, see #508
-        MPVLib.setOptionString("vd-lavc-dr", "no")
     }
 
     fun playFile(filePath: String) {
@@ -201,6 +200,7 @@ internal class MPVView(context: Context, attrs: AttributeSet) : SurfaceView(cont
             Property("loop-playlist"),
             Property("loop-file"),
             Property("shuffle", MPV_FORMAT_FLAG),
+            Property("hwdec-current")
         )
 
         for ((name, format) in p)
@@ -294,15 +294,12 @@ internal class MPVView(context: Context, attrs: AttributeSet) : SurfaceView(cont
         get() = MPVLib.getPropertyInt("time-pos")
         set(progress) = MPVLib.setPropertyInt("time-pos", progress!!)
 
-    val hwdecActive: Boolean
-        get() = (MPVLib.getPropertyString("hwdec-current") ?: "no") != "no"
+    val hwdecActive: String
+        get() = MPVLib.getPropertyString("hwdec-current") ?: "no"
 
     var playbackSpeed: Double?
         get() = MPVLib.getPropertyDouble("speed")
         set(speed) = MPVLib.setPropertyDouble("speed", speed!!)
-
-    val filename: String?
-        get() = MPVLib.getPropertyString("filename")
 
     val estimatedVfFps: Double?
         get() = MPVLib.getPropertyDouble("estimated-vf-fps")
@@ -333,7 +330,7 @@ internal class MPVView(context: Context, attrs: AttributeSet) : SurfaceView(cont
     fun cyclePause() = MPVLib.command(arrayOf("cycle", "pause"))
     fun cycleAudio() = MPVLib.command(arrayOf("cycle", "audio"))
     fun cycleSub() = MPVLib.command(arrayOf("cycle", "sub"))
-    fun cycleHwdec() = MPVLib.command(arrayOf("cycle-values", "hwdec", "mediacodec-copy", "no"))
+    fun cycleHwdec() = MPVLib.command(arrayOf("cycle-values", "hwdec", "auto", "no"))
 
     fun cycleSpeed() {
         val speeds = arrayOf(0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0)
