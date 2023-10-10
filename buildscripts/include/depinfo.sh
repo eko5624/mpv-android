@@ -5,15 +5,15 @@
 # also remember to update path.sh
 
 v_sdk=8512546_latest
-v_ndk=r25c
-v_ndk_n=25.2.9519653
+v_ndk=r26
+v_ndk_n=26.0.10792818
 v_sdk_build_tools=30.0.3
 
 v_lua=5.2.4
-v_harfbuzz=7.0.1
-v_fribidi=1.0.12
-v_freetype=2-13-0
-v_mbedtls=2.28.2
+v_harfbuzz=8.1.1
+v_fribidi=1.0.13
+v_freetype=2-13-1
+v_mbedtls=2.28.4
 
 
 ## Dependency tree
